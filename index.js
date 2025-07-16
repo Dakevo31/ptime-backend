@@ -1,5 +1,5 @@
 // index.js
-// Redeploy for Firebase key fix
+// Redeploy again for Firebase key fix
 const express = require("express");
 const cors = require("cors");
 const admin = require("firebase-admin");
