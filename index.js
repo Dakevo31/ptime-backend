@@ -5,7 +5,7 @@ const admin = require("firebase-admin");
 require("dotenv").config();
 
 // Inicializar Firebase Admin
-const serviceAccount = require("./serviceAccountKey.json"); // <- asegúrate de que este archivo esté en la raíz del backend
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -13,7 +13,11 @@ admin.initializeApp({
 
 const db = admin.firestore();
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://ptime.cloud",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 app.use(express.json());
 
 // Ruta para crear usuario
